@@ -4,7 +4,7 @@ package HeapSort;
 public class HeapSort {
     
     private int[] element;
-    private static final int ROOTLOC = 1;
+    //private static final int ROOTLOC = 1;
     private static final int DEFAULT = 10;
 
     public HeapSort(int size) {
