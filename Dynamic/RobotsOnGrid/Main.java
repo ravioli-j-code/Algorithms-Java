@@ -31,29 +31,16 @@ public class Main {
 
             boolean[][] maze =
                     {
-                            {true, false, true, true, true, false, true, true, true, false, true, true},
-                            {true, false, true, false, true, false, true, true, true, false, true, true},
-                            {false, true, true, true, true, false, true, true, true, false, true, true},
-                            {false, true, true, true, true, false, true, true, true, false, true, true},
-                            {true, true, true, true, true, true, true, false, true, true, true, true},
-                            {true, true, true, true, true, false, true, true, true, true, true, false},
-                            {false, false, true, true, true, true, true, true, true, false, true, true},
-                            {false, false, true, true, true, false, true, true, true, true, true, true},
-                            {true, true, true, false, true, false, true, true, true, true, true, true},
-                            {true, false, true, false, true, false, true, true, true, false, true, true},
-                            {false, false, true, true, true, true, true, true, true, false, true, false},
-                            {false, false, true, true, true, true, false, true, true, true, true, false},
-                            {true, true, true, true, true, false, true, true, true, true, true, true},
-                            {true, true, true, true, true, true, true, true, true, true, true, true},
-                            {false, true, false, true, true, true, true, true, true, true, true, true},
-                            {true, true, false, true, true, true, true, true, true, false, true, true},
-                            {true, true, false, true, true, false, true, true, true, false, true, true},
-                            {false, true, false, true, true, true, true, false, true, true, true, true},
-                            {true, true, true, true, true, true, true, false, true, true, true, false},
-                            {true, true, true, true, true, true, true, false, true, true, true, false},
-                            {true, true, true, true, true, true, true, false, false, false, true, false},
-                            {false, true, true, true, true, true, true, true, true, true, true, true},
-                            {false, true, true, true, true, false, true, true, true, true, true, true}
+                            {true, false, true, true, true, true, true, true, true},
+                            {true, false, true, false, true, true, true, true, true},
+                            {true, true, true, true, true, true, true, true, true},
+                            {true, false, true, true, true, true, true, true, true},
+                            {true, false, true, true, true, true, true, true, true},
+                            {true, true, true, false, false, false, true, true, true},
+                            {true, true, true, true, true, true, true, true, true},
+                            {true, true, true, true, false, false, true, true, true},
+                            {true, true, true, true, true, true, false, true, true},
+                            {true, true, true, true, true, true, true, false, true}
                     };
             switch(s) {
                 case "1" :
@@ -61,6 +48,10 @@ public class Main {
                     path = robotsOnGrid.getPath(maze);
                     checktime.end();
                     System.out.println("possible ways by brute : ");
+                    if (path == null) {
+                        System.out.println("no path.");
+                        break;
+                    }
                     for (int i = 0 ; i < path.size(); i++ ) {
                         System.out.println(path.get(i).toString());
                     }
@@ -71,6 +62,10 @@ public class Main {
                     path = robotsOnGridRev.getPath(maze);
                     checktime.end();
                     System.out.println("possible ways by revised : ");
+                    if (path == null) {
+                        System.out.println("no path.");
+                        break;
+                    }
                     for (int i = 0 ; i < path.size(); i++ ) {
                         System.out.println(path.get(i).toString());
                     }
@@ -78,7 +73,6 @@ public class Main {
                     break;
                 case "q" :
                     flag = false;
-                    System.out.println("exit. ");
                     break;
 
             }
