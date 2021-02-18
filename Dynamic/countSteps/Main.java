@@ -1,10 +1,10 @@
-package Dynamic.countSteps;
+package Dynamic.CountSteps;
 
 import java.util.Scanner;
 
 import Utils.CheckRuntime;
 
-public class CountStepsMain {
+public class Main {
     
     public static void main (String[] args) {
         

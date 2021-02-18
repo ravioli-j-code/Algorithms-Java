@@ -1,4 +1,4 @@
-package Dynamic.countSteps;
+package Dynamic.CountSteps;
 
 import java.util.Arrays;
 

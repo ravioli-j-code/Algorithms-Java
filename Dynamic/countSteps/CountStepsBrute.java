@@ -1,4 +1,4 @@
-package Dynamic.countSteps;
+package Dynamic.CountSteps;
 
 public class CountStepsBrute {
 
