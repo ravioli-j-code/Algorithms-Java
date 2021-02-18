@@ -1,2 +1,4 @@
-# Algorithms-Java
-#### 1. greedy, dynamic, search
+
+# Java Algorithms
+
+## 1. Greedy, dynamic, search
