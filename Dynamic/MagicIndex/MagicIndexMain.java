@@ -36,8 +36,7 @@ public class MagicIndexMain {
             System.out.println("q. quit");
 
             String s = sc.next();
-            int countInt = 0;
-            int resultIndex = 0;
+            int resultIndex;
 
             switch(s) {
                 case "1" :
