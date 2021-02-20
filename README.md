@@ -1,4 +1,4 @@
 
 # Java Algorithms
 
-## 1. Greedy, dynamic, search
+Algorithm Study Code Repository
