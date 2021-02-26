@@ -9,6 +9,13 @@ import java.util.ArrayList;
  */
 public class ParenthesesRecurAdven {
 
+     ArrayList<String> generateParentheses(int count) {
+        char[] str = new char[count * 2] ;
+        ArrayList<String> list = new ArrayList<String>();
+        addParentheses(list, count, count, str, 0);
+        return list;
+    }
+
     void addParentheses(ArrayList <String> list, int leftRem, int rightRem, char[] str, int index ) {
         if (leftRem < 0 || rightRem < leftRem ) return;
         if (leftRem == 0 && rightRem == 0 ) {
@@ -20,13 +27,6 @@ public class ParenthesesRecurAdven {
             str[index] = ')';
             addParentheses(list, leftRem, rightRem + 1, str, index + 1 );
         }
-    }
-
-    ArrayList<String> generateParentheses(int count) {
-        char[] str = new char[count * 2] ;
-        ArrayList<String> list = new ArrayList<String>();
-        addParentheses(list, count, count, str, 0);
-        return list;
     }
 
 }
