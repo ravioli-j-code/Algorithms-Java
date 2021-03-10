@@ -43,14 +43,8 @@ public class TruckCrossBridge {
 
         // 기다리는 애가 있거나
         // 움직이는 애가 있으면 계속 진행
-         System.out.println("==========================");
         while(!waiting.isEmpty() || !moving.isEmpty()) {
             answer++; // 최초 1 카운트..
-
-            System.out.println("------------------");
-            System.out.println(waiting.size());
-            System.out.println(moving.size());
-            System.out.println("------------------");
 
             // 만약 움직이는 트럭이 없으면
             if (moving.isEmpty()) {
