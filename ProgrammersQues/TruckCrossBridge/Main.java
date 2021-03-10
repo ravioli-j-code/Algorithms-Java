@@ -11,12 +11,35 @@ public class Main {
 
         TruckCrossBridge cross = new TruckCrossBridge();
 
-        int[] truckWeight = {10,10,10,10,10,10,10,10,10,10};
-        int bridgeWeight = 100;
-        int bridgeLength = 100;
+        int[] truckWeight1 = {7, 4, 5, 6};
+        int bridgeWeight = 10;
+        int bridgeLength = 2;
 
-        int result = cross.getCrossTime(bridgeLength, bridgeWeight, truckWeight);
+        int result = cross.runTrucks(bridgeLength, bridgeWeight, truckWeight1);
         System.out.println(result);
+
+        int[] truckWeight2 = { 10 };
+        bridgeWeight = 100;
+        bridgeLength = 100;
+
+        result = cross.runTrucks(bridgeLength, bridgeWeight, truckWeight2);
+        System.out.println(result);
+
+        int[] truckWeight3 = {10,10,10,10,10,10,10,10,10,10};
+        bridgeWeight = 100;
+        bridgeLength = 100;
+
+        result = cross.runTrucks(bridgeLength, bridgeWeight, truckWeight3);
+        System.out.println(result);
+
+        int[] truckWeight4 = {10,10,10,10};
+        bridgeWeight = 30;
+        bridgeLength = 30;
+
+        result = cross.runTrucks(bridgeLength, bridgeWeight, truckWeight4);
+        System.out.println(result);
+
+
     }
 
 }
