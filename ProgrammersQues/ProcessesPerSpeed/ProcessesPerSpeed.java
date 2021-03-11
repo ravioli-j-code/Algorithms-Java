@@ -41,8 +41,6 @@ public class ProcessesPerSpeed {
         int jobs = 0;
         while (!finishDays.isEmpty()) {
 
-            System.out.println(finishDays);
-
             if (target == 0) {
                 target = finishDays.remove();
                 jobs++;
