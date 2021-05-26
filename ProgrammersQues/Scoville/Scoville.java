@@ -1,9 +1,6 @@
 package ProgrammersQues.Scoville;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * @author : 진경인
@@ -47,47 +44,26 @@ public class Scoville {
 
     */
 
-    public static int ScovilleRun(int[] inArr, int K) {
-        if (inArr.length < 2 || inArr.length > 1000000) return -1;
-        if (K < 0 || K > 1000000000) return -1;
+    public static int ScovilleRun(int[] scoville, int K) {
+        PriorityQueue<Integer> q = new PriorityQueue<>();
 
-        ArrayList<Integer> arr = new ArrayList<>();
-        boolean isValid = true;
-        for (int i = 0; i < inArr.length; i++ ) {
-            if (inArr[i] < 0 || inArr[i] > 1000000 ) {
-                isValid = false;
-                break;
-            }
-            if (inArr[i] < K) {
-                arr.add(inArr[i]);
-            }
+        for(int i = 0; i < scoville.length; i++)
+            q.add(scoville[i]);
+
+        int count = 0;
+        while(q.size() > 1 && q.peek() < K){
+            int weakHot = q.poll();
+            int secondWeakHot = q.poll();
+
+            int mixHot = weakHot + (secondWeakHot * 2);
+            q.add(mixHot);
+            count++;
         }
 
-        if (!isValid) return -1;
-        int stir = 0;
+        if(q.size() <= 1 && q.peek() < K)
+            count = -1;
 
-        while(true) {
-            int size = arr.size();
-            if (size < 2) {
-                if (size == 1 && arr.get(0) < K) {
-                    isValid = false;
-                }
-                break;
-            }
-
-            Collections.sort(arr);
-            if (arr.get(0) >= K) break;
-
-            stir++;
-            int newInt = arr.get(0) + arr.get(1) * 2;
-            arr.add(newInt);
-            arr.remove(0);
-            arr.remove(0);
-        }
-
-        if (!isValid) return -1;
-
-        return stir;
+        return count;
     }
 
 
