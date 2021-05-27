@@ -72,7 +72,7 @@ public class Scoville {
         int[] inputArr = { 1, 2, 3, 9, 10, 12, 31, 2, 3,  2, 3, 9, 10, 12, 31, 11222, 11223,  32122, 22223,
                 123123, 221110, 345312, 334331, 222, 352433,  234232, 523423, 252349, 234210, 23212, 343231, 234232, 323423,  244,
                 3433, 56759, 45610, 34512, 67831, 2432, 2343,  2342, 2343, 4569, 45610, 2312, 4531, 22, 433 };
-        int returnInt = ScovilleRun(inputArr, 1000000000);
+        int returnInt = ScovilleRun(inputArr, 1000);
 
         System.out.println("the result is : " + returnInt);
 
