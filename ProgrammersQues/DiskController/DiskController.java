@@ -60,65 +60,155 @@ public class DiskController {
     static class Job {
 
         int reqTime;
+        int leftTime;
         int processTime;
-        int durationTime;
-        int waitTime = 0;
+        int startTime = 0;
 
         public Job(int[] param) {
             this.reqTime = param[0];
+            this.leftTime = param[1];
             this.processTime = param[1];
-            this.durationTime = param[0] + param[1];
         }
 
         public void process() {
-           this.processTime--;
+           this.leftTime--;
         }
 
-        public int getDuration(int wTime) {
-            return wTime - this.reqTime;
+        public boolean isFinished() {
+           return this.leftTime > 0 ? false : true;
+        }
+
+        public int getDuration(int endTime) {
+            return endTime - this.reqTime;
+        }
+
+    }
+
+    static class Processor {
+
+        Queue<Job> jobList;
+        Job currentJob;
+        int size;
+        int workingTime = 0;
+        int durTime = 0;
+
+
+        // init
+        public Processor(int[][] jobs) {
+            jobList = new LinkedList <>();
+            for (int[] j : jobs) {
+                jobList.add(new Job(j));
+            }
+            this.size = jobList.size();
+        }
+
+        public Job getShortProcessJob (int workingTime) {
+            Job shortJob = null;
+            Queue<Job> filteredQueue = new LinkedList <>();
+
+            while (!jobList.isEmpty() ) {
+
+                if ( shortJob == null) {
+                    shortJob = jobList.poll();
+                } else if ( shortJob.processTime > jobList.peek().processTime ){
+                    filteredQueue.add(shortJob);
+                    shortJob = jobList.poll();
+                } else {
+                    filteredQueue.add(jobList.poll());
+                }
+            }
+
+            if (workingTime < shortJob.reqTime) {
+                filteredQueue.add(shortJob);
+                shortJob = null;
+            }
+
+            while (!filteredQueue.isEmpty() ) {
+                jobList.offer(filteredQueue.poll());
+            }
+
+            return shortJob;
+        }
+
+        public Job getFirstRequestJob () {
+            Job firstJob = null;
+            Queue<Job> filteredQueue = new LinkedList <>();
+
+            while (!jobList.isEmpty() ) {
+
+                if ( firstJob == null) {
+                    firstJob = jobList.poll();
+                } else if ( firstJob.reqTime > jobList.peek().reqTime ){
+                    filteredQueue.add(firstJob);
+                    firstJob = jobList.poll();
+                } else {
+                    filteredQueue.add(jobList.poll());
+                }
+            }
+
+            if (workingTime < firstJob.reqTime) {
+                filteredQueue.add(firstJob);
+                firstJob = null;
+            }
+
+            while (!filteredQueue.isEmpty() ) {
+                jobList.offer(filteredQueue.poll());
+            }
+
+            return firstJob;
+        }
+
+        public int startProcess() {
+
+            while(!jobList.isEmpty()) {
+
+                // currentJob 갱신
+                if ( currentJob == null ) {
+
+                    Job firstJob = getFirstRequestJob();
+                    if (firstJob != null ) {
+                       currentJob = firstJob;
+                       jobList.remove(firstJob);
+                    }
+
+                } else if (currentJob.isFinished()) {
+
+                    Job shortJob = getShortProcessJob(workingTime);
+                    if (shortJob != null ) {
+
+                        durTime += currentJob.getDuration(workingTime);
+                        System.out.println("workingTime : " + workingTime + " request : " + currentJob.reqTime + " processTime : " + currentJob.processTime + " duration time : " + durTime);
+
+                        currentJob = shortJob;
+                        jobList.remove(shortJob);
+
+                    }
+                }
+
+                workingTime++;
+
+                if (currentJob != null)
+                    currentJob.process();
+
+            }
+
+            durTime += currentJob.getDuration(workingTime);
+            System.out.println("workingTime : " + workingTime + " request : " + currentJob.reqTime + " processTime : " + currentJob.processTime + " duration time : " + durTime);
+
+            return durTime / size;
         }
 
     }
 
     public static int solution(int[][] jobs) {
 
-        Queue <Job> jobList = new LinkedList <>();
-        int mProc = 0;
-
-        for (int[] j : jobs) {
-            if (mProc < j[1]) mProc = j[1];
-            jobList.add(new Job(j));
-        }
-
-        int runTime = 0;
-        int totTime = 0;
-        int jobSize = jobs.length;
-
-        while ( mProc > 0 ) {
-
-            jobSize = jobs.length; // 초기화
-            runTime++;
-
-            while( jobSize > 0 ) {
-                Job j = jobList.poll();
-                if (j == null ) break;
-                if (j.processTime > 0 ) {
-                    j.process();
-                    jobList.offer(j);
-                } else { // 끝난 작업
-                    totTime += j.getDuration(runTime);
-                    System.out.println("list cnt : " + jobList.size());
-                }
-                jobSize--;
-            }
-            mProc--;
-        }
-        return totTime;
+        Processor processor = new Processor(jobs);
+        return processor.startProcess();
     }
 
     public static void main(String[] args) {
 
-        int[][] jobsArr = {{0, 3}, {1, 9}, {2, 6}};
+        int[][] jobsArr = {{24, 10}, {28, 39}, {43, 20}, {37, 5}, {47, 22}, {20, 47}, {15, 34}, {15, 2}, {35, 43}, {26, 1}};
 
         int rInt = solution(jobsArr);
         System.out.println(rInt);
