@@ -57,161 +57,95 @@ public class DiskController {
      *
      */
 
-    static class Job {
+    public static void main(String[] args) {
+        // int[][] jobsArr = {{0, 3}, {1, 9}, {2, 6}};
+        int[][] jobsArr = {{24, 10}, {28, 39}, {43, 20}, {37, 5}, {47, 22}, {20, 47}, {15, 34}, {15, 2}, {35, 43}, {26, 1}};
 
-        int reqTime;
-        int leftTime;
-        int processTime;
-        int startTime = 0;
+    }
 
-        public Job(int[] param) {
-            this.reqTime = param[0];
-            this.leftTime = param[1];
-            this.processTime = param[1];
+    class Job {
+        int request;
+        int duration;
+        int position;
+
+        public Job(int paramRequest, int paramDuration) {
+            this.request = paramRequest;
+            this.duration = paramDuration;
+            this.position = paramDuration;
         }
 
         public void process() {
-           this.leftTime--;
+            this.position--;
         }
 
-        public boolean isFinished() {
-           return this.leftTime > 0 ? false : true;
+        public boolean isFinish() {
+            return this.position < 0 ? true : false;
         }
-
-        public int getDuration(int endTime) {
-            return endTime - this.reqTime;
-        }
-
     }
 
-    static class Processor {
+    class HardDisk {
 
-        Queue<Job> jobList;
-        Job currentJob;
-        int size;
-        int workingTime = 0;
-        int durTime = 0;
+        int armPosition;
+        int idealDuration;
 
+        Queue<Job> waitQueue = null;
+        Job targetRmJob = null;
+        Job workJob = null;
 
-        // init
-        public Processor(int[][] jobs) {
-            jobList = new LinkedList <>();
-            for (int[] j : jobs) {
-                jobList.add(new Job(j));
+        public HardDisk (int[][] paramJobs) {
+
+            for (int[] param : paramJobs ) {
+                waitQueue.offer(new Job(param[0], param[1]));
             }
-            this.size = jobList.size();
+            // 초기화
+            this.armPosition = 0;
+            this.idealDuration = 0;
+
         }
 
-        public Job getShortProcessJob (int workingTime) {
-            Job shortJob = null;
-            Queue<Job> filteredQueue = new LinkedList <>();
-
-            while (!jobList.isEmpty() ) {
-
-                if ( shortJob == null) {
-                    shortJob = jobList.poll();
-                } else if ( shortJob.processTime > jobList.peek().processTime ){
-                    filteredQueue.add(shortJob);
-                    shortJob = jobList.poll();
-                } else {
-                    filteredQueue.add(jobList.poll());
-                }
-            }
-
-            if (workingTime < shortJob.reqTime) {
-                filteredQueue.add(shortJob);
-                shortJob = null;
-            }
-
-            while (!filteredQueue.isEmpty() ) {
-                jobList.offer(filteredQueue.poll());
-            }
-
-            return shortJob;
+        public void moveArm () {
+            this.armPosition++;
         }
 
-        public Job getFirstRequestJob () {
-            Job firstJob = null;
-            Queue<Job> filteredQueue = new LinkedList <>();
+        public void run () {
 
-            while (!jobList.isEmpty() ) {
+            while(!waitQueue.isEmpty()) {
 
-                if ( firstJob == null) {
-                    firstJob = jobList.poll();
-                } else if ( firstJob.reqTime > jobList.peek().reqTime ){
-                    filteredQueue.add(firstJob);
-                    firstJob = jobList.poll();
-                } else {
-                    filteredQueue.add(jobList.poll());
-                }
-            }
+                if ( workJob == null ) {
 
-            if (workingTime < firstJob.reqTime) {
-                filteredQueue.add(firstJob);
-                firstJob = null;
-            }
-
-            while (!filteredQueue.isEmpty() ) {
-                jobList.offer(filteredQueue.poll());
-            }
-
-            return firstJob;
-        }
-
-        public int startProcess() {
-
-            while(!jobList.isEmpty()) {
-
-                // currentJob 갱신
-                if ( currentJob == null ) {
-
-                    Job firstJob = getFirstRequestJob();
-                    if (firstJob != null ) {
-                       currentJob = firstJob;
-                       jobList.remove(firstJob);
-                    }
-
-                } else if (currentJob.isFinished()) {
-
-                    Job shortJob = getShortProcessJob(workingTime);
-                    if (shortJob != null ) {
-
-                        durTime += currentJob.getDuration(workingTime);
-                        System.out.println("workingTime : " + workingTime + " request : " + currentJob.reqTime + " processTime : " + currentJob.processTime + " duration time : " + durTime);
-
-                        currentJob = shortJob;
-                        jobList.remove(shortJob);
-
-                    }
                 }
 
-                workingTime++;
-
-                if (currentJob != null)
-                    currentJob.process();
+                // do something : 요청시간이 수행시간보다 작고, 작업시간이 작은 아이를 찾아서 배정
+                targetRmJob = findShortest();
+                if (targetRmJob != null) {
+                    waitQueue.remove(targetRmJob);
+                }
+                // remove queue
+                moveArm();
 
             }
 
-            durTime += currentJob.getDuration(workingTime);
-            System.out.println("workingTime : " + workingTime + " request : " + currentJob.reqTime + " processTime : " + currentJob.processTime + " duration time : " + durTime);
-
-            return durTime / size;
         }
 
+        public Job findShortest() {
+
+            Job returnJob = null;
+            for ( Job j : waitQueue ) {
+
+                if ( armPosition >= j.request ) continue;
+                if (returnJob == null) {
+                    returnJob = j;
+                    continue;
+                }
+
+            }
+            return returnJob;
+
+        }
+
+
     }
 
-    public static int solution(int[][] jobs) {
 
-        Processor processor = new Processor(jobs);
-        return processor.startProcess();
-    }
 
-    public static void main(String[] args) {
-
-        int[][] jobsArr = {{24, 10}, {28, 39}, {43, 20}, {37, 5}, {47, 22}, {20, 47}, {15, 34}, {15, 2}, {35, 43}, {26, 1}};
-
-        int rInt = solution(jobsArr);
-        System.out.println(rInt);
-
-    }
 }
