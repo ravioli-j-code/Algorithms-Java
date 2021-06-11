@@ -7,7 +7,7 @@ import java.util.*;
  * @version : 1.0
  * @since : 2021. 05. 27 오전 9:20
  */
-public class DiskController {
+public class DiskWorker {
 
     /**
      * DiskController
@@ -57,18 +57,80 @@ public class DiskController {
      *
      */
 
-    public static void main(String[] args) {
-        // int[][] jobsArr = {{0, 3}, {1, 9}, {2, 6}};
-        int[][] jobsArr = {{24, 10}, {28, 39}, {43, 20}, {37, 5}, {47, 22}, {20, 47}, {15, 34}, {15, 2}, {35, 43}, {26, 1}};
+    public int working(int[][] paramArr) {
+
+        ArrayList<Work> wList= new ArrayList <>(); // 작업할 목록
+
+        // 작업목록 세팅
+        for (int[] param : paramArr ) {
+            Work nWork = new Work(param[0], param[1]);
+            wList.add(nWork);
+        }
+
+        // 초기화
+        int totalDuration = 0; // 실제 일한 시간
+        int totalSize = wList.size();
+        int workTime = 0; // 흘러간 시간
+        Work cWork = null;
+
+        // 대상 목록이 없을때까지 수행
+        while( !wList.isEmpty() || (wList.isEmpty() && cWork != null )) {
+
+            // 수행 시작
+            workTime++;
+
+            // 현재 작업이 있는지 여부 확인. 없으면 배정.
+            if (cWork == null) {
+                // 작업 배정 규칙 : 1. 현재 수행 시간 이전에 요청이 온 작업. 2. 대기목록 중에서 수행시간이 제일 짧은 작업
+                // 작업을 배정하고 난 뒤에는 대기열에서 해당 작업을 삭제함
+                for (Work w : wList) {
+                    if (cWork == null || ( workTime >= w.request && cWork.duration > w.duration )) {
+                        cWork = w;
+                    }
+                }
+
+                // 새로운 작업이 배정되었다면
+                if (cWork != null) {
+                    wList.remove(cWork);
+                }
+
+            }
+
+            // 작업이 있으면 작업의 duration을 진행시킴
+            if (cWork != null) {
+                cWork.process();
+                // 진행 결과 수행시간이 지났으면 작업해제
+                if (cWork.isFinish()) {
+
+                    // TODO: 특정 작업의 요청시간이 다른 작업들보다 훨씬 나중에 있는 경우
+                    int adjust = 0;
+                    if ( workTime == cWork.request ) {
+                        adjust = cWork.duration;
+                    } else if ( workTime >= totalDuration ) {
+                        adjust = workTime - totalDuration;
+                    } else {
+                        adjust = workTime - cWork.request;
+                    }
+
+                    totalDuration += adjust;
+
+                    System.out.println("workTime is " + workTime);
+                    System.out.println("adjust is " + adjust);
+                    System.out.println("totalDuration is " + totalDuration);
+                    cWork = null;
+                }
+            }
+        }
+        return totalDuration / totalSize;
 
     }
 
-    class Job {
-        int request;
-        int duration;
-        int position;
+    class Work {
+        int request; // 요청시간
+        int duration; // 수행시간
+        int position; // 수행경과
 
-        public Job(int paramRequest, int paramDuration) {
+        public Work(int paramRequest, int paramDuration) {
             this.request = paramRequest;
             this.duration = paramDuration;
             this.position = paramDuration;
@@ -79,73 +141,8 @@ public class DiskController {
         }
 
         public boolean isFinish() {
-            return this.position < 0 ? true : false;
+            return this.position < 1 ? true : false;
         }
     }
-
-    class HardDisk {
-
-        int armPosition;
-        int idealDuration;
-
-        Queue<Job> waitQueue = null;
-        Job targetRmJob = null;
-        Job workJob = null;
-
-        public HardDisk (int[][] paramJobs) {
-
-            for (int[] param : paramJobs ) {
-                waitQueue.offer(new Job(param[0], param[1]));
-            }
-            // 초기화
-            this.armPosition = 0;
-            this.idealDuration = 0;
-
-        }
-
-        public void moveArm () {
-            this.armPosition++;
-        }
-
-        public void run () {
-
-            while(!waitQueue.isEmpty()) {
-
-                if ( workJob == null ) {
-
-                }
-
-                // do something : 요청시간이 수행시간보다 작고, 작업시간이 작은 아이를 찾아서 배정
-                targetRmJob = findShortest();
-                if (targetRmJob != null) {
-                    waitQueue.remove(targetRmJob);
-                }
-                // remove queue
-                moveArm();
-
-            }
-
-        }
-
-        public Job findShortest() {
-
-            Job returnJob = null;
-            for ( Job j : waitQueue ) {
-
-                if ( armPosition >= j.request ) continue;
-                if (returnJob == null) {
-                    returnJob = j;
-                    continue;
-                }
-
-            }
-            return returnJob;
-
-        }
-
-
-    }
-
-
 
 }
