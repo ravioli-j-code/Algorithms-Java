@@ -16,33 +16,33 @@ public class DiskTest {
 
         DiskWorker h = new DiskWorker();
         int result = 0;
-//        int[][] jobsArr1 = {{0, 3}, {1, 9}, {2, 6}};
-//        result = h.working(jobsArr1);
-//        System.out.println( customTestResult(Arrays.deepToString(jobsArr1), result, 9)) ;
-//
-//        int[][] jobsArr2 = {{0, 10}, {2, 10}, {9, 10}, {15, 2}};
-//        result = h.working(jobsArr2);
-//        System.out.println( customTestResult(Arrays.deepToString(jobsArr2), result, 14)) ;
-//
-//        int[][] jobsArr3 ={{0, 10}, {2, 12}, {9, 19}, {15, 17}};
-//        result = h.working(jobsArr3);
-//        System.out.println( customTestResult(Arrays.deepToString( jobsArr3), result, 25) );
-//
-//        int[][] jobsArr4 = {{0, 3}, {1, 9}, {2, 6}};
-//        result = h.working(jobsArr4);
-//        System.out.println( customTestResult(Arrays.deepToString(jobsArr4) , result,9)) ;
-//
-//        int[][] jobsArr5 = {{0, 1}};
-//        result = h.working(jobsArr5);
-//        System.out.println( customTestResult(Arrays.deepToString(jobsArr5), result, 1)) ;
-//
-//        int[][] jobsArr7 = {{0, 1}, {0, 1}, {0, 1}};
-//        result = h.working(jobsArr7);
-//        System.out.println( customTestResult(Arrays.deepToString(jobsArr7) , result, 2)) ;
-//
-//        int[][] jobsArr8 = {{0, 1}, {0, 1}, {0, 1}, {0, 1}};
-//        result = h.working(jobsArr8);
-//        System.out.println( customTestResult(Arrays.deepToString(jobsArr8), result, 2) );
+        int[][] jobsArr1 = {{0, 3}, {1, 9}, {2, 6}};
+        result = h.working(jobsArr1);
+        System.out.println( customTestResult(Arrays.deepToString(jobsArr1), result, 9)) ;
+
+        int[][] jobsArr2 = {{0, 10}, {2, 10}, {9, 10}, {15, 2}};
+        result = h.working(jobsArr2);
+        System.out.println( customTestResult(Arrays.deepToString(jobsArr2), result, 14)) ;
+
+        int[][] jobsArr3 ={{0, 10}, {2, 12}, {9, 19}, {15, 17}};
+        result = h.working(jobsArr3);
+        System.out.println( customTestResult(Arrays.deepToString( jobsArr3), result, 25) );
+
+        int[][] jobsArr4 = {{0, 3}, {1, 9}, {2, 6}};
+        result = h.working(jobsArr4);
+        System.out.println( customTestResult(Arrays.deepToString(jobsArr4) , result,9)) ;
+
+        int[][] jobsArr5 = {{0, 1}};
+        result = h.working(jobsArr5);
+        System.out.println( customTestResult(Arrays.deepToString(jobsArr5), result, 1)) ;
+
+        int[][] jobsArr7 = {{0, 1}, {0, 1}, {0, 1}};
+        result = h.working(jobsArr7);
+        System.out.println( customTestResult(Arrays.deepToString(jobsArr7) , result, 2)) ;
+
+        int[][] jobsArr8 = {{0, 1}, {0, 1}, {0, 1}, {0, 1}};
+        result = h.working(jobsArr8);
+        System.out.println( customTestResult(Arrays.deepToString(jobsArr8), result, 2) );
 
         int[][] jobsArr6 = {{1000, 1000}}; // false
         result = h.working(jobsArr6);
