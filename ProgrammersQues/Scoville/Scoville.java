@@ -3,7 +3,7 @@ package ProgrammersQues.Scoville;
 import java.util.*;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 05. 23 오후 1:44
  */

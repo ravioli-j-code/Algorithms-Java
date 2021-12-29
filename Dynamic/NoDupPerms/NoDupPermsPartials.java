@@ -3,7 +3,7 @@ package Dynamic.NoDupPerms;
 import java.util.ArrayList;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 24 오전 9:53
  */

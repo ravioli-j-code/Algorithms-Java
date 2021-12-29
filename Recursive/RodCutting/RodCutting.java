@@ -1,7 +1,7 @@
 package Recursive.RodCutting;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 25 오후 5:42
  * 막대기 자르기

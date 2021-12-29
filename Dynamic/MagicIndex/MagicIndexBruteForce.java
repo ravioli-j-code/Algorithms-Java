@@ -1,7 +1,7 @@
 package Dynamic.MagicIndex;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 19 오전 9:45
  * 정렬된 배열(중복없음)을 인자로 받아 인덱스와 값이 동일한 케이스를 찾아 인덱스 반환하기

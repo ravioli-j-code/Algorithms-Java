@@ -3,7 +3,7 @@ package Dynamic.Parentheses;
 import java.util.ArrayList;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 26 오전 10:14
  */

@@ -3,7 +3,7 @@ package ProgrammersQues.TruckCrossBridge;
 import java.util.*;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 03. 03 오후 2:24
  * 1. 트럭이 지나가기 전에 다리에 있는 트럭의 무게를 확인.

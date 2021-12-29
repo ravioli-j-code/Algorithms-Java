@@ -1,7 +1,7 @@
 package Dynamic.GridProduct;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 20 오전 9:40
  *

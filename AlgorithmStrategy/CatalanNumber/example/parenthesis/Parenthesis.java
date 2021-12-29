@@ -1,7 +1,7 @@
 package AlgorithmStrategy.CatalanNumber.example.parenthesis;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 03. 14 오전 9:53
  */

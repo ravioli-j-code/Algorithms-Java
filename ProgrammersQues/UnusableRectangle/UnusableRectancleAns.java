@@ -1,7 +1,7 @@
 package ProgrammersQues.UnusableRectangle;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 27 오후 3:04
  */

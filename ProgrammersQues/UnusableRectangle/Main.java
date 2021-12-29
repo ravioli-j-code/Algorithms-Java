@@ -5,7 +5,7 @@ import Utils.CheckRuntime;
 import java.util.Scanner;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 27 오전 9:22
  */

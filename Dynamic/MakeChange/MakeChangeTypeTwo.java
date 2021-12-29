@@ -1,7 +1,7 @@
 package Dynamic.MakeChange;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 03. 03 오후 1:22
  */

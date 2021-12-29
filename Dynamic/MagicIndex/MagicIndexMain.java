@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 19 오전 10:00
  */

@@ -1,7 +1,7 @@
 package Dynamic.PaintFill;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 25 오전 10:00
  */

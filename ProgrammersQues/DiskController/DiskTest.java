@@ -3,7 +3,7 @@ package ProgrammersQues.DiskController;
 import java.util.Arrays;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 06. 11 오후 2:12
  */

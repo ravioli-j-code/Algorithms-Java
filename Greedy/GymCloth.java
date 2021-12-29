@@ -3,7 +3,7 @@ package Greedy;
 import java.util.Arrays;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 07. 06 오후 4:11
  */

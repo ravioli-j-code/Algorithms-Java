@@ -1,7 +1,7 @@
 package ProgrammersQues.TruckCrossBridge;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 03. 03 오후 4:02
  */

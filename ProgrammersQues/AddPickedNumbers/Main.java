@@ -5,7 +5,7 @@ import Utils.CheckRuntime;
 import java.util.Arrays;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 26 오후 4:04
  */

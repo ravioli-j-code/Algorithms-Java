@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * @author : 진경인
+ * @author : JKI
  * @version : 1.0
  * @since : 2021. 02. 26 오후 4:16
  */
